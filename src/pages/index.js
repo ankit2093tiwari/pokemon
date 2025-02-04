@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import DummyCards from "@/components/Cards";
-import { fetchPokemonTypes, fetchPokemonList } from "./lib/lib";
+import { fetchPokemonTypes, fetchPokemonList } from "../lib/lib";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -17,15 +17,13 @@ export default function Home() {
 
   const getAllPokemanTypes = async () => {
     const result = await fetchPokemonTypes();
-    setPokemonTypes(result)
-  }
+    setPokemonTypes(result);
+  };
 
   return (
     <div className="h-screen p-8 flex flex-col justify-between">
-      
       <div className="max-w-screen-lg mx-auto w-full">
         <div className="flex flex-col gap-4 w-full">
-        
           <select
             className="w-full md:w-1/4 p-3 border rounded-md bg-white"
             value={selectedCard}
@@ -33,12 +31,12 @@ export default function Home() {
           >
             <option value="">Select</option>
             {pokemonTypes?.map((item, ind) => (
-              <option key={item} value={item}>{item}</option>
-            )
-            )}
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
           </select>
 
-         
           <div className="flex w-full md:w-1/2 border rounded-md overflow-hidden">
             <input
               type="text"
@@ -53,7 +51,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       <div className="max-w-screen-lg mx-auto mt-8 w-full flex-grow">
         <DummyCards searchQuery={search} selectedCard={selectedCard} />
       </div>
