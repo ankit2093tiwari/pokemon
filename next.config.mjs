@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: ['raw.githubusercontent.com'], // Add this line
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'raw.githubusercontent.com'
+    }
+  ]
   },
 };
 
