@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { getPokemonDetails } from "../lib/lib";
-
+import { getPokemonDetails } from "@/lib/lib";
 export default function PokemonDetail() {
   const router = useRouter();
   const { isReady } = useRouter();
@@ -12,14 +11,14 @@ export default function PokemonDetail() {
   useEffect(() => {
     if (isReady) {
       const id = router.query.id;
-      pokemanDetails(id)
+      pokemanDetails(id);
     }
   }, [isReady, router.query.id]);
 
   const pokemanDetails = async (id) => {
     const getData = await getPokemonDetails(parseInt(id));
-    setPokemonDetails(getData)
-  }
+    setPokemonDetails(getData);
+  };
 
   if (!pokemonDetails) {
     return <div>Loading...</div>;
@@ -37,7 +36,7 @@ export default function PokemonDetail() {
           <li className="text-gray-500">{pokemonDetails?.name}</li>
         </ol>
       </nav>
-      
+
       <Link href="/" className="text-green-500 text-sm mb-4">
         &lt; Back
       </Link>
@@ -59,13 +58,13 @@ export default function PokemonDetail() {
             <strong>Type:</strong> {pokemonDetails.types}
           </p>
           <p>
-            <strong>Stats:</strong> { pokemonDetails.stats?.join(', ') }
+            <strong>Stats:</strong> {pokemonDetails.stats?.join(", ")}
           </p>
           <p>
-            <strong>Abilities:</strong> {pokemonDetails.abilities?.join(', ')}
+            <strong>Abilities:</strong> {pokemonDetails.abilities?.join(", ")}
           </p>
           <p>
-            <strong>Some Moves:</strong> {pokemonDetails.moves?.join(', ')}
+            <strong>Some Moves:</strong> {pokemonDetails.moves?.join(", ")}
           </p>
         </div>
       </div>

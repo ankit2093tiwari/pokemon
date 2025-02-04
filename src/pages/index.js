@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import DummyCards from "@/components/Cards";
-import { fetchPokemonTypes, fetchPokemonList } from "../lib/lib";
+import { fetchPokemonTypes, fetchPokemonList } from "@/lib/lib";
 
 export default function Home() {
   const [search, setSearch] = useState("");
