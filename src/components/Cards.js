@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchPokemonList } from "@/pages/lib/lib";
+import { fetchPokemonList } from "@/lib/lib";
 
 export default function Cards({ searchQuery, selectedCard }) {
-
   const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
@@ -13,12 +12,16 @@ export default function Cards({ searchQuery, selectedCard }) {
 
   const fetchPokemonListData = async () => {
     const result = await fetchPokemonList();
-    setPokemonList(result)
-  }
+    setPokemonList(result);
+  };
 
   const filteredData = pokemonList.filter((item) => {
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSelection = selectedCard ? item.types.includes(selectedCard) : true;
+    const matchesSearch = item.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesSelection = selectedCard
+      ? item.types.includes(selectedCard)
+      : true;
     return matchesSearch && matchesSelection; // Apply both filters
   });
 
@@ -31,7 +34,6 @@ export default function Cards({ searchQuery, selectedCard }) {
               key={item?.id}
               className="bg-white rounded-lg shadow-md min-h-[400px] flex flex-col" // Apply flex to avoid white space
             >
-            
               <div className="w-full p-6 flex justify-center flex-shrink-0">
                 <Image
                   src={item?.image}
@@ -43,8 +45,13 @@ export default function Cards({ searchQuery, selectedCard }) {
 
               <div className="p-6 bg-gray-100 grid gap-6 rounded-lg flex-grow">
                 <h2 className="mt-4 font-semibold">{item?.name}</h2>
-                <p className="text-gray-500">Types : {item?.types?.join(', ')}</p>
-                <Link href={`/pokemon/${item?.id}`} className="text-customgreen mt-2 inline-block"            >
+                <p className="text-gray-500">
+                  Types : {item?.types?.join(", ")}
+                </p>
+                <Link
+                  href={`/pokemon/${item?.id}`}
+                  className="text-customgreen mt-2 inline-block"
+                >
                   Details →
                 </Link>
               </div>
